@@ -46,7 +46,7 @@ use app\models\Cliente;
         /*
             Todos que tem matricula
         */ 
-        $query = Cliente::find()->select(['id','nome','cpf'])->distinct();
+        $query = Cliente::find()->select(['cliente.id','cliente.nome','cliente.cpf'])->distinct();
 
         #$query = Cliente::find()->distinct();
         
