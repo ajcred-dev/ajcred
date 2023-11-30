@@ -1,0 +1,5 @@
+ALTER TABLE `ajcred`.`contrato` 
+CHARACTER SET = utf8 , COLLATE = utf8_general_ci ,
+ADD COLUMN `status_contrato` CHAR(1) NULL DEFAULT NULL AFTER `parcela_paga`,
+ADD COLUMN `juros_anual` FLOAT(11) NULL DEFAULT NULL AFTER `status_contrato`,
+ADD COLUMN `juros_mensal` FLOAT(11) NULL DEFAULT NULL AFTER `juros_anual`;

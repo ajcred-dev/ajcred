@@ -1,0 +1,32 @@
+[SALVA DADOS CLIENTE]
+curl -H "Expect: 100-continue" -H "Host: appsaec.consiglog.com.br" --data "email=ultraboxsilva38%40gmail.com&celular=82991235644&senha=112233&senhaConfirma=112233&idUsuarioCripto=FDA855930523331A&idClienteCripto=9E48996EECE4E62F&idOrgao=1158&login=59222786491" "https://appsaec.consiglog.com.br/api/usuario/SalvarComplementoPadrao"
+
+[GET MARGEM CLIENTE]
+curl -H "Host: appsaec.consiglog.com.br" -H "Accept: /" -H "User-Agent: App.Xamarin/1.12 CFNetwork/978.0.7 Darwin/18.7.0" -H "Accept-Language: pt-br" -H "Authorization: Bearer m6b6O1lNvlmxHkB27OWaVOUXa3oP8S9XhN1XTPglqCoP-H-uLegjFjtRymCi4OTXDhn0f4tItood43YHyReqX6DoaJAb4G1v2eEOELJoe2reh9WNrgH045rMCDN5mBLP8kiwLIEiPahsxLomThlcL_xXsPZXqgpa8Cc8Dbfc8CnAP2qJa1xFy3nxjLLVgqg7okXrsjTE3ML3rU5rHxiHJbAIThvW9FBUkj4i7I2aN4EaW53YLy-qh-WifiQ1cZP9rj-nQyOjl_9sE7bcd2WkUMWT5zaaxdoOEAFQm4L4i07yy8VwZeTTxdEiIc76ZbOR8pNTQofe55nNHrFaSmC21g" --compressed "https://appsaec.consiglog.com.br/api/margem/obterMargem/1158/59222786491/00000002724/JEANE%20GUEDES%20BARBOSA"
+
+[LISTA CONSIGNACAO CLIENTE]
+curl -H "Host: appsaec.consiglog.com.br" -H "Accept: /" -H "User-Agent: App.Xamarin/1.12 CFNetwork/978.0.7 Darwin/18.7.0" -H "Accept-Language: pt-br" -H "Authorization: Bearer m6b6O1lNvlmxHkB27OWaVOUXa3oP8S9XhN1XTPglqCoP-H-uLegjFjtRymCi4OTXDhn0f4tItood43YHyReqX6DoaJAb4G1v2eEOELJoe2reh9WNrgH045rMCDN5mBLP8kiwLIEiPahsxLomThlcL_xXsPZXqgpa8Cc8Dbfc8CnAP2qJa1xFy3nxjLLVgqg7okXrsjTE3ML3rU5rHxiHJbAIThvW9FBUkj4i7I2aN4EaW53YLy-qh-WifiQ1cZP9rj-nQyOjl_9sE7bcd2WkUMWT5zaaxdoOEAFQm4L4i07yy8VwZeTTxdEiIc76ZbOR8pNTQofe55nNHrFaSmC21g" --compressed "https://appsaec.consiglog.com.br/api/consignacao/ListarConsignacao/1158/59222786491/00000002724"
+
+
+
+
+[BUSCA POR CPF]
+curl -H "User-Agent: Dalvik/2.1.0 (Linux; U; Android 7.1.2; SM-G935F Build/N2G48H)" -H "Accept: */*" -H "Authorization: Bearer " -H "Host: api-gateway-app.consiglog.com.br" --compressed "https://api-gateway-app.consiglog.com.br/api/v1/usuario-app/listar?login=34699210244"
+
+
+[AUTENTICAR ANTES DE BUSCAR CPF]
+curl -H "Content-Type: application/json; charset=utf-8" -H "User-Agent: Dalvik/2.1.0 (Linux; U; Android 7.1.2; SM-G935F Build/N2G48H)" -H "Host: autenticacao.consiglog.com.br" --data-binary "{\"login\":\"AppPortalServidor\",\"senha\":\"Cs$ervice#963\"}" "https://autenticacao.consiglog.com.br/api/autenticacao/autenticar"
+
+
+[LOGIN]
+curl -H "User-Agent: Dalvik/2.1.0 (Linux; U; Android 7.1.2; SM-G935F Build/N2G48H)" -H "Host: appsaec.consiglog.com.br" --data "grant_type=password&username=59222786491&password=112233&matricula=00000002724&tipoAutentica=0&idOrgao=1158" "https://appsaec.consiglog.com.br/api/security/token"
+
+
+
+[LOGIN GOVAM]
+curl -H "User-Agent: Dalvik/2.1.0 (Linux; U; Android 7.1.2; SM-G935F Build/N2G48H)" -H "Host: appgovam.consiglog.com.br" --data "grant_type=password&username=38409488272&password=Senh@1234&matricula=0001749200G&tipoAutentica=0&idOrgao=1111" "https://appgovam.consiglog.com.br/api/security/token"
+
+
+[BUSCA NO GOVAM]
+curl -H "Host: appgovam.consiglog.com.br" -H "Accept: /" -H "User-Agent: App.Xamarin/1.12 CFNetwork/978.0.7 Darwin/18.7.0" -H "Accept-Language: pt-br" -H "Authorization: Bearer T6Rm5bmPmLJOt_MLPhpnhlq-UfPCR9k_pLc4psnHQVOY83XV4TRoMM9nPe6sH3cylmtlERlPJ5Q47070WxgNNeqPWjwvLVVCLlhuXHRNmhXF5OdNWtA27wWxRThDw0871cWs380dJnRl27syKx7kaiaxia6_96E3sxgbnVBqz5lbsItzLCjkmR9NRXVlA-MY2zOtifuEb_tv-7FJi-B3-VyypAIJfx3BnX16JYIMA_49VQrbTFi7fRE0hPR7R5dnJpLT1M31sBrKONcvb0GoBfGjVcA9IzyeEnbLBdVBVJXZfR1W0PQl069P559M_QgAWEYIHmoFLMnW01Ny861OmQ" --compressed "https://appgovam.consiglog.com.br/api/margem/obterMargem/1130/70424594234/0001700910D/JEIVIANE"
+

@@ -1,0 +1,73 @@
+Federal a disposicao do Estado
+Municipal de Porto Velho a disposicao do
+Municipal de Villhena a Disposicao de RO
+Comissionado - Vinculo Federal
+Contrato Temporario
+Cedido com onus p/ Estado (INSS)
+Comissionado com vinculo
+Estagiario
+Municipal de Rolim de Moura a Disposicao
+Municipal de Alvorada do Oeste Disp. RO 
+Municipal de Buritis a Disposicao de RO 
+Municipal de Cacaulandia a Disp. de RO  
+Municipal de Campo Novo a Disposicao RO 
+Municipal de Cujubim a Disposicao de RO 
+Municipal de Gov. Jorge Teixeira - RO   
+Municipal de Jaru a Disposicao de RO    
+Municipal de Machadinho D'Oeste Disp RO 
+Municipal de Nova Mamore a Disp RO      
+Municipal de Novo Horizonte a Disp RO   
+Municipal de Sao Francisco a Disp. RO   
+Municipal de Sao Miguel do Guapore  - RO
+Municipal de Theobroma a Disp RO        
+Municipal de Vale do Paraiso a Disp RO  
+Municipal de Ariquemes a Disposicao RO  
+Municipal de Guajara-Mirim a Disp. de RO
+Municipal de Ji-Parana a Disposicao RO  
+Municipal de Seringueiras a DisposicaoRO
+Comissionado - Vinculo Municipal        
+Cedido com onus p/ Estado               
+Municipal de Espigao do Oeste RO        
+Municipal de Vale do Anari a Disp. RO   
+Voluntarios                             
+Municipal de Campo Grande - MS a Disposi
+Comissionado - Estadual (Inss)          
+Estadual do Parana a Disp - RO          
+Municipal de Monte Negro a  Disp de RO  
+Municipal de Ouro Preto a Disposicao RO 
+Municipal de Humaita - AM a Disposicao d
+Bolsista                                
+Contrato Temporario Estatutario         
+Comissionado sem vinculo                
+Agente Politico                         
+Contrato - CLT
+CLT
+COMISSIONADO
+AGENTE POLITICO S/EFE - Ativo
+ESTATUTARIO - Excluido
+COMISSIONADO - REG GERAL - Ativo - -1 meses
+COMISSIONADO - RPPS ORG DIF - Ativo
+AG.POLITICO 1ºESCALAO COM P - Ativo
+COMISSIONADO - REG GERAL - Excluido - 0 meses
+ESTATUTARIO MILITAR - Excluido
+AG.POLITICO 1ºESCALAO MSM ORG - Ativo
+COMISSIONADO - RPPS MSM ORG - Ativo
+04/07/2019 - COMISSIONADO - RPPS MSM ORG - Ativo - -40 meses
+CONVOCADO - Ativo
+CONVOCADO - Excluido                         
+CONTRATO PUBLICO - Excluido
+RESERVA ATIVA - Excluido
+ESTATUTARIO - Bloqueado
+AGEPREV-ASSEMBLÉIA LEGISLATIVA - Excluido
+AGEPREV-TRIBUNAL DE CONTAS - Excluido
+AGEPREV-CARTORÁRIO - Excluido
+COMISSIONADO - REG GERAL - Excluido - 1 meses
+COMISSIONADO - REG GERAL - Excluido - 2 meses
+AG.POLITICO 1ºESCALAO COM P - Excluido
+CVMRR - Excluido
+AG.POLITICO 1ºESCALAO ORG DIF - Ativo
+AGEPREV-TRIBUNAL DE JUSTIÇA - Excluido
+COMISSIONADO - RPPS ORG DIF - Excluido
+CLT - TEMPO INDETERMINADO - Ativo
+CONTRATO PUBLICO - Ativo
+QUADRO SUPLEMENTAR - Excluido
