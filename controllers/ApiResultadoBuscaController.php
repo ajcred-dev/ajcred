@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\base\Cliente;
 use app\models\base\Matricula;
 use app\models\Busca;
 use app\models\Cache;
+use app\models\Cliente as ModelsCliente;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -389,6 +391,121 @@ class ApiResultadoBuscaController extends Controller
 
         exit();
         */
+    }
+
+
+    /**
+     * Relatório quantitativo de clientes e contratos exportado
+     * via CSV
+     * Por padrão coloquei o convenio do tipo 7 que seria o RIO CONSIG
+     */
+    public function actionGetRelatorioQuantitativoClienteContrato($convenio_id=7){
+    #public function actionGetRelatorioQuantitativo($convenio_id=7){
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+
+        /**
+         *  Pego os clientes e as matriculas desse convenio
+         */
+
+        $query = ModelsCliente::find()
+                    ->select(['cliente.id as cliente_id','cliente.nome cliente_nome','cliente.cpf cliente_cpf','matricula.id matricula_id', 'matricula.matricula matricula'])
+                    ->join('INNER JOIN', 'matricula', 'cliente.id = matricula.cliente_id')
+                    ->andWhere(['matricula.convenio_id' => $convenio_id])
+                    ->andWhere(['matricula.is_ativo' => 1]);
+
+        #$sql = $query->createCommand()->getRawSql();
+
+
+        $arrClienteFinal = [];
+
+        $colunasRelatorio = [
+            'Cpf',
+            'Nome',
+            'Matricula',
+            'Margem Empréstimo',
+            'Margem Empréstimo Reservada',
+            'Margem Empréstimo Disponível',
+            'Margem Cartão',
+            'Margem Cartão Reservada',
+            'Margem Cartão Disponível',
+            'Margem Benefício',
+            'Margem Benefício Reservada',
+            'Margem Benefício Disponível',
+            'Quantidade de Contratos'
+        ];
+
+        $arrClienteFinal[] = $colunasRelatorio;
+
+        $arrClienteMatricula = $query
+                        ->asArray()
+                        ->all();
+         
+
+        foreach($arrClienteMatricula as $clienteMatricula){
+            
+            #PEGO O RESULTADO DA ULTIMA BUSCA
+            $queryResultadoBusca = ResultadoBusca::find()
+                            ->select(['id','margem','margem_disponivel','margem_reservada','margem_cartao','margem_cartao_reservada','margem_cartao_disponivel','margem_beneficio','margem_beneficio_reservada','margem_beneficio_disponivel'])
+                            ->where(['matricula_id' => $clienteMatricula['matricula_id']])
+                            ->orderBy(['id' => SORT_DESC]);
+
+            $resultadoBusca = $queryResultadoBusca->asArray()->one();
+
+            #SE ENCONTREI DADOS eu coloco no relatorio, pra ir gerando de acordo com que for sendo inserido na base em caso do banco ainda não estar alimentado.
+            if($resultadoBusca){
+                #Vejo agora um quantitativo de contratos
+                $queryQuantitativoContrato = Contrato::find()
+                                        ->select(['id'])
+                                        ->where(['resultado_busca_id' => $resultadoBusca['id']]);
+                $qtdContratos = $queryQuantitativoContrato->count();
+
+                /**
+                 *  'Cpf',
+                    'Nome',
+                    'Matricula',
+                    'Margem Empréstimo',
+                    'Margem Empréstimo Reservada',
+                    'Margem Empréstimo Disponível',
+                    'Margem Cartão',
+                    'Margem Cartão Reservada',
+                    'Margem Cartão Disponível',
+                    'Margem Benefício',
+                    'Margem Benefício Reservada',
+                    'Margem Benefício Disponível',
+                    'Quantidade de Contratos'
+                 */
+                $qtd = (int) $queryQuantitativoContrato->count();
+
+                $arrToInsert = [
+                    $clienteMatricula['cliente_cpf'],
+                    $clienteMatricula['cliente_nome'],
+                    $clienteMatricula['matricula'],
+                    $resultadoBusca['margem'],
+                    $resultadoBusca['margem_reservada'],
+                    $resultadoBusca['margem_disponivel'],
+                    $resultadoBusca['margem_cartao'],
+                    $resultadoBusca['margem_cartao_reservada'],
+                    $resultadoBusca['margem_cartao_disponivel'],
+                    $resultadoBusca['margem_beneficio'],
+                    $resultadoBusca['margem_beneficio_reservada'],
+                    $resultadoBusca['margem_beneficio_disponivel'],
+                    $qtd,
+                ];
+                $arrClienteFinal[] = $arrToInsert;
+            }
+        }
+
+
+        $output = fopen( 'php://output', 'w' );
+        ob_end_clean();
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename=relatorio_quantitativo.csv');
+
+        
+        foreach($arrClienteFinal AS $data_item){
+            fputcsv($output, $data_item);
+        }
+        exit();
     }
 
     

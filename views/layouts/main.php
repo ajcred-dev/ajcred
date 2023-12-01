@@ -70,6 +70,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     ['label' => 'Download CSV diferença margem CECON', 'url' => ['/api-resultado-busca/get-diferenca-busca']],
                     ['label' => 'Download CSV diferença margem ECONSIG', 'url' => ['/api-resultado-busca/get-diferenca-busca','convenio_id' => 4]],
                     ['label' => 'Download CSV diferença margem GOVAM', 'url' => ['/api-resultado-busca/get-diferenca-busca','convenio_id' => 6]],
+                    ['label' => 'Download CSV quantitativo contratos RIOCONSIG', 'url' => ['/api-resultado-busca/get-relatorio-quantitativo-cliente-contrato']],
                 ],
             ],
         ]
