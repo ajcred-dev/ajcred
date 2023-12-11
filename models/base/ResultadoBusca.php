@@ -17,6 +17,9 @@ use Yii;
  * @property string $margem_beneficio
  * @property string $margem_beneficio_reservada
  * @property string $margem_beneficio_disponivel
+ * @property string $margem_sindicato
+ * @property string $margem_sindicato_reservada
+ * @property string $margem_sindicato_disponivel
  * @property integer $busca_id
  * @property integer $matricula_id
  * @property string $data_inclusao
@@ -52,7 +55,7 @@ class ResultadoBusca extends \yii\db\ActiveRecord
             [['busca_id', 'matricula_id'], 'required'],
             [['busca_id', 'matricula_id'], 'integer'],
             [['data_inclusao'], 'safe'],
-            [['margem', 'margem_disponivel', 'margem_reservada', 'margem_cartao', 'margem_cartao_reservada', 'margem_cartao_disponivel', 'margem_beneficio', 'margem_beneficio_reservada', 'margem_beneficio_disponivel'], 'string', 'max' => 150]
+            [['margem', 'margem_disponivel', 'margem_reservada', 'margem_cartao', 'margem_cartao_reservada', 'margem_cartao_disponivel', 'margem_beneficio', 'margem_beneficio_reservada', 'margem_beneficio_disponivel', 'margem_sindicato', 'margem_sindicato_reservada', 'margem_sindicato_disponivel'], 'string', 'max' => 150]
         ];
     }
 
@@ -80,6 +83,9 @@ class ResultadoBusca extends \yii\db\ActiveRecord
             'margem_beneficio' => 'Margem Beneficio',
             'margem_beneficio_reservada' => 'Margem Beneficio Reservada',
             'margem_beneficio_disponivel' => 'Margem Beneficio Disponivel',
+            'margem_sindicato' => 'Margem Sindicato',
+            'margem_sindicato_reservada' => 'Margem Sindicato Reservada',
+            'margem_sindicato_disponivel' => 'Margem Sindicato Disponivel',
             'busca_id' => 'Busca ID',
             'matricula_id' => 'Matricula ID',
             'data_inclusao' => 'Data Inclusao',
