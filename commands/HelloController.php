@@ -501,6 +501,162 @@ class HelloController extends Controller
         }
     }
 
+
+    public function actionImportaMeuConsig(){
+        
+    
+        $convenioId = false;
+
+        $convenio = Convenio::find()->where(['nome' => 'MeuConsig'])->one();
+
+        if(!$convenio){
+            $objConvenio = new Convenio();
+            $objConvenio->nome = 'MeuConsig';
+            $objConvenio->sigla = 'MEUCONSIG';
+            $objConvenio->save();
+            echo 'CONVÊNIO MEUCONSIG ADICIONADO';
+
+            $convenioId = $objConvenio->id;
+        }else{
+            $convenioId = $convenio->id;
+        }
+        
+        $arr = [];
+
+        $handle = fopen("csvs_importados/dados-basicos-meuconsig.txt", "r");
+        if ($handle) {
+            while (($line = fgets($handle)) !== false) {
+                $line = trim($line);
+                $jsonRes = json_decode($line,true);
+                
+                if($jsonRes){
+
+                    if(!isset($jsonRes['data'])){
+                        continue;
+                    }
+
+                    #15 => AL
+                    #8 => GO
+                    
+                    /*
+
+                    $secretaria = $jsonRes['data']['secretaria'];
+                    $cod = $jsonRes['data']['convenio']['con_rem_id'];
+                    $codSrm = $jsonRes['data']['convenio']['con_srm_id'];
+                    $codRem = $jsonRes['data']['convenio']['con_rem_id'];
+
+                    $arrInfo = [
+                        $cod,
+                        $codSrm,
+                        $codRem,
+                        #$secretaria
+                    ];
+
+                    
+                    $key = $cod.';'.$codSrm.';'.$codRem;
+                    
+
+                    if(!isset($arr[$key])){
+                        $arr[$key] = [
+                            'orgao' => $secretaria,
+                            'qtd' => 0
+                        ];    
+                    }
+
+                    $arr[$key]['qtd'] = $arr[$key]['qtd'] + 1;
+                    
+                    
+
+                    var_dump($arr);
+
+                    continue;
+
+                    
+                    $clienteId = false;
+
+                    */
+
+
+                    $pessoa  = $jsonRes['data']['pessoa'];
+                    $cpf = trim($pessoa['pes_cpf']);
+                    $matricula = trim($jsonRes['data']['matricula']);
+
+                    //Primeiro Verifico se tem alguma pessoa com o cpf já existente na base
+                    $cliente = Cliente::find()
+                                ->select(['id'])
+                                ->where(['cpf' => $cpf ])
+                                ->one();
+                
+                    if($cliente){
+                        echo 'CPF '.$cpf.' JÁ CADASTRADO NA BASE';
+                        echo 'MATRICULA '.$matricula.PHP_EOL;
+                        $clienteId = $cliente->id;
+                    }else{
+                        $pessoa  = $jsonRes['data']['pessoa'];
+                        $objCliente = new CLIENTE();
+                        $objCliente->nome = trim($pessoa['pes_nome']);
+                        $objCliente->cpf = $cpf;
+                        $objCliente->data_nascimento = trim($this->formatarData($pessoa['pes_dt_nascimento']));
+                        $objCliente->save();
+                        $clienteId = $objCliente->id;
+
+                        echo 'CPF '.$cpf.'CADASTRADO COM SUCESSO'.PHP_EOL;
+                    }
+                    
+                    //Verifico se tem email vinculado
+                    $emailStr = trim($jsonRes['data']['email']);
+                    if($emailStr != ''){
+                        $countEmail = Email::find()->where(['cliente_id' => $clienteId, 'email' => $emailStr])->count();
+                        $countEmail = (int) $countEmail;
+                        
+                        //Não tem email cadastrado na base
+                        if($countEmail == 0){
+                            $objEmail = new Email();
+                            $objEmail->email = $emailStr;
+                            $objEmail->cliente_id = $clienteId;
+                            $objEmail->save();
+
+                            echo $objEmail->id.'EMAIL DO CPF '.$cpf.'CADASTRADO COM SUCESSO'.PHP_EOL;
+                        }
+
+                    }
+                    
+                    //Agora vejo se a matricula já se encontra cadastrada na base de dados
+                    $resMatricula = Matricula::find()->where(['convenio_id' => $convenioId, 'matricula' => $matricula, 'cliente_id' => $clienteId])->one();
+                    
+                    var_dump($matricula);
+
+                    //Caso não tenha sido cadastrado eu faço o cadastro na base
+                    if(!$resMatricula){
+                        $objMatricula = new Matricula();
+                        $objMatricula->convenio_id = $convenioId;
+                        $objMatricula->cliente_id = $clienteId;
+                        $objMatricula->matricula = $matricula;
+                        $objMatricula->ocupacao = trim($jsonRes['data']['secretaria']).' '.trim($jsonRes['data']['lotacao']);
+                        $objMatricula->is_ativo = (trim($jsonRes['data']['situacao']) == "ATIVO") ? 1 : 0;
+                        $objMatricula->save();
+
+
+                        echo $objMatricula->id.' Matricula cadastrada com sucesso'.PHP_EOL;
+                   }
+
+
+                    continue;
+
+                    
+                }
+                //var_dump();
+            }
+            
+            /*
+            file_put_contents('arr.txt',json_encode($arr));
+
+            echo 'FINALIZADO';
+            */
+        }
+    }
+    
+
     public function actionImportaRioConsig(){
 
         $convenioId = false;

@@ -518,17 +518,31 @@ class ApiResultadoBuscaController extends Controller
             $resultadoBusca->matricula_id = $_POST['matricula_id'];
             $resultadoBusca->busca_id = $busca_id;
             
-            $resultadoBusca->margem = $_POST['margem'];
-            $resultadoBusca->margem_disponivel = $_POST['margem_disponivel'];
-            $resultadoBusca->margem_reservada = $_POST['margem_reservada'];
+            if(isset($_POST['margem'])){
+                $resultadoBusca->margem = $_POST['margem'];
+                $resultadoBusca->margem_disponivel = $_POST['margem_disponivel'];
+                $resultadoBusca->margem_reservada = $_POST['margem_reservada'];
+            }
             
-            $resultadoBusca->margem_cartao = $_POST['margem_cartao'];
-            $resultadoBusca->margem_cartao_reservada = $_POST['margem_cartao_reservada'];
-            $resultadoBusca->margem_cartao_disponivel = $_POST['margem_cartao_disponivel'];
+            if(isset($_POST['margem_cartao'])){
+                $resultadoBusca->margem_cartao = $_POST['margem_cartao'];
+                $resultadoBusca->margem_cartao_reservada = $_POST['margem_cartao_reservada'];
+                $resultadoBusca->margem_cartao_disponivel = $_POST['margem_cartao_disponivel'];
+            }
             
-            $resultadoBusca->margem_beneficio = $_POST['margem_beneficio'];
-            $resultadoBusca->margem_beneficio_reservada = $_POST['margem_beneficio_reservada'];
-            $resultadoBusca->margem_beneficio_disponivel = $_POST['margem_beneficio_disponivel'];
+            if(isset($_POST['margem_beneficio'])){
+                $resultadoBusca->margem_beneficio = $_POST['margem_beneficio'];
+                $resultadoBusca->margem_beneficio_reservada = $_POST['margem_beneficio_reservada'];
+                $resultadoBusca->margem_beneficio_disponivel = $_POST['margem_beneficio_disponivel'];
+            }
+
+            if(isset($_POST['margem_sindicato'])){
+                $resultadoBusca->margem_sindicato = $_POST['margem_sindicato'];
+                $resultadoBusca->margem_sindicato_reservada = $_POST['margem_sindicato_reservada'];
+                $resultadoBusca->margem_sindicato_disponivel = $_POST['margem_sindicato_disponivel'];
+            }
+
+
             $resultadoBusca->save();
 
             return ["msg" => "SALVO COM SUCESSO", "id" => $resultadoBusca->id];
