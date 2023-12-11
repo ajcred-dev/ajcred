@@ -37,6 +37,7 @@ class ApiResultadoBuscaController extends Controller
                 m.id as matricula_id ,
                 c.cpf as cliente_cpf,
                 c.nome as cliente_nome,
+                m.matricula as matricula,
                 m.ocupacao as ocupacao,
                 rb.margem as margem,
                 rb.margem_disponivel as margem_disponivel,
@@ -69,6 +70,7 @@ class ApiResultadoBuscaController extends Controller
         $arrClienteFinal[] = [
             "CPF",
             "NOME",
+            "MATRICULA",
             "OCUPACAO",
             "MARGEM",
             "MARGEM_RESERVADA",
@@ -93,6 +95,7 @@ class ApiResultadoBuscaController extends Controller
             $newCliente = [
                 "cpf" => $cliente['cliente_cpf'] ,
                 "nome" => $cliente['cliente_nome'],
+                "matricula" => $cliente['matricula'],
                 "ocupacao" => $cliente['ocupacao'],
                 "margem" => str_replace(".",",",$cliente['margem']),
                 "margem_reservada" => str_replace(".",",",$cliente['margem_reservada']),
@@ -189,6 +192,7 @@ class ApiResultadoBuscaController extends Controller
                     m.id as matricula_id ,
                     c.cpf as cliente_cpf,
                     c.nome as cliente_nome,
+                    m.matricula as matricula,
                     m.ocupacao as ocupacao
                 FROM 
                     cliente c
@@ -351,8 +355,7 @@ class ApiResultadoBuscaController extends Controller
 
             \Yii::$app->mailer->compose()
                 ->setFrom('informativo@ajcred.com')
-                ->setTo('junior@ajcred.com')
-                //->setTo('ultraboxsilva38@gmail.com')
+                ->setTo('relatorio@ajcred.com')
                 ->setSubject('Relatório Diferença '.$convenio->nome)
                 ->setTextBody('Olá, o relatório solicitado está em anexo. =D')
                 ->attach($fullPath)
