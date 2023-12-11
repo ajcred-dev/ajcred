@@ -72,7 +72,7 @@ $config = [
                 'scheme' => 'smtp',
 				'host' => 'smtp.titan.email',
 				'username' => 'informativo@ajcred.com',
-				'password' => 'ajcredinformativo433!',
+				'password' => 'Mkt2010@',
 				'port' => '465',
 				'encryption' => 'tls',
 			],
