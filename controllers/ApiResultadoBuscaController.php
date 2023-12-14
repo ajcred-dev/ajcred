@@ -48,6 +48,9 @@ class ApiResultadoBuscaController extends Controller
                 rb.margem_beneficio as margem_beneficio,
                 rb.margem_beneficio_reservada as margem_beneficio_reservada,
                 rb.margem_beneficio_disponivel as margem_beneficio_disponivel,
+                rb.margem_sindicato as margem_sindicato,
+                rb.margem_sindicato_reservada as margem_sindicato_reservada,
+                rb.margem_sindicato_disponivel as margem_sindicato_disponivel,
                 rb.id as resultado_busca_id
             FROM 
                 cliente c
@@ -80,7 +83,10 @@ class ApiResultadoBuscaController extends Controller
             "MARGEM_CARTAO_DISPONIVEL",
             "MARGEM_BENEFICIO",
             "MARGEM_BENEFICIO_RESERVADA",
-            "MARGEM_BENEFICIO_DISPONIVEL"
+            "MARGEM_BENEFICIO_DISPONIVEL",
+            "MARGEM_SINDICATO",
+            "MARGEM_SINDICATO_RESERVADA",
+            "MARGEM_SINDICATO_DISPONIVEL",
         ];
 
         foreach($arrCliente as $cliente){
@@ -106,6 +112,9 @@ class ApiResultadoBuscaController extends Controller
                 "margem_beneficio" => str_replace(".",",",$cliente['margem_beneficio']),
                 "margem_beneficio_reservada" => str_replace(".",",",$cliente['margem_beneficio_reservada']),
                 "margem_beneficio_disponivel" => str_replace(".",",",$cliente['margem_beneficio_disponivel']),
+                "margem_sindicato" => str_replace(".",",",$cliente['margem_sindicato']),
+                "margem_sindicato_reservada" => str_replace(".",",",$cliente['margem_sindicato_reservada']),
+                "margem_sindicato_disponivel" => str_replace(".",",",$cliente['margem_sindicato_disponivel']),
             ];
 
 
