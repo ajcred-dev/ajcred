@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\base\Matricula;
+use app\models\Matricula;
 use app\models\Busca;
 use Yii;
 use yii\filters\AccessControl;
@@ -28,6 +28,27 @@ class ApiMatriculaController extends Controller
         $res = \Yii::$app->getDb()->createCommand($sql)->queryAll();
 
         return $res;
+    }
+
+
+    public function actionDesativarMatricula($matricula_id){
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+
+        $matricula = Matricula::find()
+            ->where(['id' => $matricula_id])
+            ->one();
+
+        if($matricula){
+            $matricula->is_ativo = 0;
+            $res = $matricula->save();
+
+            if($res){
+                return ["msg" => "Matricula desativada com sucesso"];
+            }else{
+                return ["msg" => "Erro ao desativar matricula"];
+            }
+        }
+        return ["msg" => "Matricula não encontrada"];
     }
 
     /**
