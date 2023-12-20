@@ -14,7 +14,42 @@ use app\models\ContactForm;
 use app\models\ResultadoBusca;
 
 class ApiMatriculaController extends Controller
-{
+{   
+
+    public function actionGetMatricula($matricula_id){
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+
+        $sql = "SELECT 
+                    m.id,
+                    m.matricula,
+                    c.cpf,
+                    m.convenio_id,
+                    con.sigla
+                FROM 
+                    matricula m 
+                INNER JOIN
+                    cliente c
+                ON
+                    m.cliente_id = c.id
+                INNER JOIN
+                    convenio con
+                ON
+                    m.convenio_id = con.id
+                WHERE 
+                    m.id =".$matricula_id;
+                    
+        $res = \Yii::$app->getDb()->createCommand($sql)->queryOne();
+
+        if($res){
+            return ['error' => false, 'retorno' => $res];
+        }else{
+            return ['error' => true, 'retorno' => 'Nenhuma matricula encontrada'];
+        }
+
+        return $res;
+
+
+    }
 
     /**
      * Caso de matricula recem importada 
@@ -23,9 +58,20 @@ class ApiMatriculaController extends Controller
     public function actionGetListaMatriculaSemCliente($convenio_id){
         \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
 
-        $sql = "SELECT * from matricula where cliente_id IS NULL and convenio_id=".$convenio_id;
+        $sql = "SELECT 
+                    m.id,
+                    m.matricula,
+                    c.cpf 
+                FROM 
+                    matricula m
+                INNER JOIN
+                    cliente c
+                ON
+                    m.cliente_id =  c.id
+                where 
+                    m.id =".$convenio_id;
 
-        $res = \Yii::$app->getDb()->createCommand($sql)->queryAll();
+        $res = \Yii::$app->getDb()->createCommand($sql)->queryOne();
 
         return $res;
     }

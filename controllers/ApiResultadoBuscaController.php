@@ -526,6 +526,7 @@ class ApiResultadoBuscaController extends Controller
         \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
 
         if(\Yii::$app->request->isPost){
+
             $resultadoBusca = new ResultadoBusca();
             $resultadoBusca->matricula_id = $_POST['matricula_id'];
             $resultadoBusca->busca_id = $busca_id;

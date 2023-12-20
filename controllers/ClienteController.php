@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Cliente;
 use app\models\ClienteSearch;
+use app\models\ClientePublicoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +25,22 @@ class ClienteController extends Controller
                 ],
             ],
         ];
+    }
+
+
+    public function actionConsultaPublica(){
+
+        $this->layout = 'consulta-publica';
+
+        $searchModel = new ClientePublicoSearch();
+        
+        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('consulta-publica', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -63,20 +80,37 @@ class ClienteController extends Controller
         ]);
 
         
-        #var_dump($providerResultadoBusca);
-        
-        #echo '<br>';
-
-        #var_dump($providerTelefone);
-        
-        #exit;
-
-        #var_dump($model->getMatriculas()->joinWith(['resultadoBuscas'])->orderBy('id DESC')->one(),$model->matriculas);
-        #exit();
-
-
-
         return $this->render('view', [
+            'model' => $this->findModel($id),
+            'providerEmail' => $providerEmail,
+            'providerEndereco' => $providerEndereco,
+            'providerMatricula' => $providerMatricula,
+            'providerTelefone' => $providerTelefone,
+        ]);
+    }
+
+
+
+    public function actionViewPublica($id)
+    {
+        $this->layout = 'consulta-publica';
+        
+        $model = $this->findModel($id);
+        $providerEmail = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->emails,
+        ]);
+        $providerEndereco = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->enderecos,
+        ]);
+        $providerMatricula = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->matriculas,
+        ]);
+        $providerTelefone = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->telefones,
+        ]);
+
+        
+        return $this->render('view-publica', [
             'model' => $this->findModel($id),
             'providerEmail' => $providerEmail,
             'providerEndereco' => $providerEndereco,
