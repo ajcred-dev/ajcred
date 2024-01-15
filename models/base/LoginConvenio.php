@@ -13,6 +13,7 @@ use Yii;
  * @property integer $tipo_acesso
  * @property integer $convenio_id
  * @property string $descricao_tipo_acesso
+ * @property string $ultima_sessao
  *
  * @property \app\models\Convenio $convenio
  */
@@ -40,6 +41,7 @@ class LoginConvenio extends \yii\db\ActiveRecord
         return [
             [['tipo_acesso', 'convenio_id'], 'integer'],
             [['convenio_id'], 'required'],
+            [['ultima_sessao'], 'string'],
             [['usuario', 'senha'], 'string', 'max' => 150],
             [['descricao_tipo_acesso'], 'string', 'max' => 250]
         ];
@@ -65,6 +67,7 @@ class LoginConvenio extends \yii\db\ActiveRecord
             'tipo_acesso' => 'Tipo Acesso',
             'convenio_id' => 'Convenio ID',
             'descricao_tipo_acesso' => 'Descricao Tipo Acesso',
+            'ultima_sessao' => 'Ultima Sessao',
         ];
     }
     

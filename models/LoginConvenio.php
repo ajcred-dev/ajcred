@@ -15,12 +15,14 @@ class LoginConvenio extends BaseLoginConvenio
      */
     public function rules()
     {
-        return [
+        return array_replace_recursive(parent::rules(),
+	    [
             [['tipo_acesso', 'convenio_id'], 'integer'],
             [['convenio_id'], 'required'],
+            [['ultima_sessao'], 'string'],
             [['usuario', 'senha'], 'string', 'max' => 150],
             [['descricao_tipo_acesso'], 'string', 'max' => 250]
-        ];
+        ]);
     }
 	
 }

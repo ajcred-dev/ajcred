@@ -11,8 +11,7 @@ use kartik\grid\GridView;
 /* @var $model app\models\Cliente */
 
 $this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Cliente', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="cliente-view">
 
@@ -79,14 +78,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'matricula',
                         'label' => 'Matrícula'
-                    ],
-                    [
-                        'attribute' => 'codigo_convenio',
-                        'label' => 'Convênio',
-                    ],
-                    [
-                        'attribute' => 'detalhe_codigo_convenio',
-                        'label' => 'Detalhe Convênio',
                     ],
                     [
                         'attribute' => 'ocupacao',

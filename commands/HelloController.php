@@ -523,11 +523,31 @@ class HelloController extends Controller
         
         $arr = [];
 
-        $handle = fopen("csvs_importados/dados-basicos-meuconsig.txt", "r");
+        $arrDetalheCodigoConvenio = [
+            '10' => 'Governo Alagoas',
+            '8' => 'Governo Goiás',
+            '22' => 'Prefeitura de Pelotas',
+            '58' => 'Prefeitura de Santo André',
+            '16' => 'Prefeitura de Governador Valares',
+            '60' => 'Prefeitura de Guarulhos',
+            '15' => 'Prefeitura de Maceió',
+            '24' => 'Prefeitura de São José dos Campos',
+            '13' => 'Prefeitura de São Luís',
+            '48' => 'Prefeitura de Sorocaba'
+        ];
+
+        $handle = fopen("csvs_importados/dados-basicos-meuconsig-novo.txt", "r");
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
                 $line = trim($line);
-                $jsonRes = json_decode($line,true);
+
+                $lineExplode = explode('|',$line);
+
+                if(count($lineExplode) < 3)continue;
+
+                $jsonRes = json_decode($lineExplode[3],true);
+
+                $codigoConvenio = $lineExplode[2];
                 
                 if($jsonRes){
 
@@ -632,6 +652,10 @@ class HelloController extends Controller
                         $objMatricula->convenio_id = $convenioId;
                         $objMatricula->cliente_id = $clienteId;
                         $objMatricula->matricula = $matricula;
+                        $objMatricula->codigo_convenio = $codigoConvenio;
+                        if(isset($arrDetalheCodigoConvenio[$codigoConvenio])){
+                            $objMatricula->detalhe_codigo_convenio = $arrDetalheCodigoConvenio[$codigoConvenio];
+                        }
                         $objMatricula->ocupacao = trim($jsonRes['data']['secretaria']).' '.trim($jsonRes['data']['lotacao']);
                         $objMatricula->is_ativo = (trim($jsonRes['data']['situacao']) == "ATIVO") ? 1 : 0;
                         $objMatricula->save();

@@ -1,0 +1,8 @@
+ALTER TABLE `ajcred`.`matricula` 
+CHARACTER SET = utf8 , COLLATE = utf8_general_ci ,
+ADD COLUMN `codigo_convenio` VARCHAR(45) NULL DEFAULT NULL AFTER `is_ativo`
+
+
+ALTER TABLE `ajcred`.`matricula` 
+CHARACTER SET = utf8 , COLLATE = utf8_general_ci ,
+ADD COLUMN `detalhe_codigo_convenio` VARCHAR(100) NULL DEFAULT NULL AFTER `codigo_convenio`

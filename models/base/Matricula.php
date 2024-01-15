@@ -13,6 +13,8 @@ use Yii;
  * @property string $matricula
  * @property string $ocupacao
  * @property integer $is_ativo
+ * @property string $codigo_convenio
+ * @property string $detalhe_codigo_convenio
  *
  * @property \app\models\Cliente $cliente
  * @property \app\models\Convenio $convenio
@@ -44,7 +46,9 @@ class Matricula extends \yii\db\ActiveRecord
         return [
             [['convenio_id'], 'required'],
             [['convenio_id', 'cliente_id', 'is_ativo'], 'integer'],
-            [['matricula', 'ocupacao'], 'string', 'max' => 150]
+            [['matricula', 'ocupacao'], 'string', 'max' => 150],
+            [['codigo_convenio'], 'string', 'max' => 45],
+            [['detalhe_codigo_convenio'], 'string', 'max' => 100]
         ];
     }
 
@@ -68,6 +72,8 @@ class Matricula extends \yii\db\ActiveRecord
             'matricula' => 'Matricula',
             'ocupacao' => 'Ocupacao',
             'is_ativo' => 'Is Ativo',
+            'codigo_convenio' => 'Codigo Convenio',
+            'detalhe_codigo_convenio' => 'Detalhe Codigo Convenio',
         ];
     }
     

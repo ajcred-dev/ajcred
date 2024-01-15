@@ -97,6 +97,73 @@ class ApiMatriculaController extends Controller
         return ["msg" => "Matricula não encontrada"];
     }
 
+
+    public function actionGetListaMeuConsignado($busca_id,$codigo_convenio){
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+
+        if($codigo_convenio == '0'){
+            $sql = "SELECT
+                        m.id as id, 
+                        m.matricula as matricula,
+                        c.cpf,
+                        c.nome,
+                        m.codigo_convenio as codigo_convenio
+                FROM 
+                    matricula as m
+                JOIN
+                    cliente as c
+                ON
+                    m.cliente_id = c.id
+                WHERE 
+                    m.id NOT IN (
+                        SELECT 
+                            rb.matricula_id 
+                        FROM 
+                            resultado_busca as rb 
+                        WHERE 
+                            busca_id = $busca_id
+                        )
+                AND
+                    m.convenio_id = 8
+                AND
+                    m.is_ativo = 1";
+        }else{
+            $sql = "SELECT
+                        m.id as id, 
+                        m.matricula as matricula,
+                        c.cpf,
+                        c.nome,
+                        m.codigo_convenio as codigo_convenio
+                FROM 
+                    matricula as m
+                JOIN
+                    cliente as c
+                ON
+                    m.cliente_id = c.id
+                WHERE 
+                    m.id NOT IN (
+                        SELECT 
+                            rb.matricula_id 
+                        FROM 
+                            resultado_busca as rb 
+                        WHERE 
+                            busca_id = $busca_id
+                        )
+                AND
+                    m.convenio_id = 8
+                AND
+                    m.codigo_convenio = '$codigo_convenio'
+                AND
+                    m.is_ativo = 1";
+        }
+
+        
+
+        $res = \Yii::$app->getDb()->createCommand($sql)->queryAll();
+
+        return $res;
+    }
+
     /**
      * Vem a lista de matriculas para consultar
      */
@@ -109,7 +176,8 @@ class ApiMatriculaController extends Controller
                         m.id as id, 
                         m.matricula as matricula,
                         c.cpf,
-                        c.nome
+                        c.nome,
+                        m.codigo_convenio as codigo_convenio
                 FROM 
                     matricula as m
                 JOIN

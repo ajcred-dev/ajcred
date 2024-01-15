@@ -1,0 +1,3 @@
+ALTER TABLE `ajcred`.`login_convenio` 
+CHARACTER SET = utf8 , COLLATE = utf8_general_ci ,
+ADD COLUMN `ultima_sessao` TEXT NULL DEFAULT NULL AFTER `descricao_tipo_acesso`;

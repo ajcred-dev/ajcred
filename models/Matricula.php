@@ -15,11 +15,14 @@ class Matricula extends BaseMatricula
      */
     public function rules()
     {
-        return [
-            [['convenio_id', 'cliente_id'], 'required'],
-            [['convenio_id', 'cliente_id'], 'integer'],
+        return array_replace_recursive(parent::rules(),
+	    [
+            [['convenio_id'], 'required'],
+            [['convenio_id', 'cliente_id', 'is_ativo'], 'integer'],
             [['matricula', 'ocupacao'], 'string', 'max' => 150],
-        ];
+            [['codigo_convenio'], 'string', 'max' => 45],
+            [['detalhe_codigo_convenio'], 'string', 'max' => 100]
+        ]);
     }
 	
 }
