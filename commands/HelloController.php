@@ -548,6 +548,7 @@ class HelloController extends Controller
                 $jsonRes = json_decode($lineExplode[3],true);
 
                 $codigoConvenio = $lineExplode[2];
+                $codigoConvenio = trim($lineExplode[2]);
                 
                 if($jsonRes){
 

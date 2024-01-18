@@ -51,6 +51,9 @@ class ApiResultadoBuscaController extends Controller
                 rb.margem_sindicato as margem_sindicato,
                 rb.margem_sindicato_reservada as margem_sindicato_reservada,
                 rb.margem_sindicato_disponivel as margem_sindicato_disponivel,
+                rb.margem_cartao_beneficio as margem_cartao_beneficio,
+                rb.margem_cartao_beneficio_reservada as margem_cartao_beneficio_reservada,
+                rb.margem_cartao_beneficio_disponivel as margem_cartao_beneficio_disponivel,
                 rb.id as resultado_busca_id
             FROM 
                 cliente c
@@ -87,6 +90,9 @@ class ApiResultadoBuscaController extends Controller
             "MARGEM_SINDICATO",
             "MARGEM_SINDICATO_RESERVADA",
             "MARGEM_SINDICATO_DISPONIVEL",
+            "MARGEM_CARTAO_BENEFICIO",
+            "MARGEM_CARTAO_BENEFICIO_RESERVADA",
+            "MARGEM_CARTAO_BENEFICIO_DISPONIVEL",
         ];
 
         foreach($arrCliente as $cliente){
@@ -115,6 +121,9 @@ class ApiResultadoBuscaController extends Controller
                 "margem_sindicato" => str_replace(".",",",$cliente['margem_sindicato']),
                 "margem_sindicato_reservada" => str_replace(".",",",$cliente['margem_sindicato_reservada']),
                 "margem_sindicato_disponivel" => str_replace(".",",",$cliente['margem_sindicato_disponivel']),
+                "margem_cartao_beneficio" => str_replace(".",",",$cliente['margem_cartao_beneficio']),
+                "margem_cartao_beneficio_reservada" => str_replace(".",",",$cliente['margem_cartao_beneficio_reservada']),
+                "margem_cartao_beneficio_disponivel" => str_replace(".",",",$cliente['margem_cartao_beneficio_disponivel']),
             ];
 
 
@@ -553,6 +562,12 @@ class ApiResultadoBuscaController extends Controller
                 $resultadoBusca->margem_sindicato = $_POST['margem_sindicato'];
                 $resultadoBusca->margem_sindicato_reservada = $_POST['margem_sindicato_reservada'];
                 $resultadoBusca->margem_sindicato_disponivel = $_POST['margem_sindicato_disponivel'];
+            }
+
+            if(isset($_POST['margem_cartao_beneficio'])){
+                $resultadoBusca->margem_cartao_beneficio = $_POST['margem_cartao_beneficio'];
+                $resultadoBusca->margem_cartao_beneficio_reservada = $_POST['margem_cartao_beneficio_reservada'];
+                $resultadoBusca->margem_cartao_beneficio_disponivel = $_POST['margem_cartao_beneficio_disponivel'];
             }
 
 

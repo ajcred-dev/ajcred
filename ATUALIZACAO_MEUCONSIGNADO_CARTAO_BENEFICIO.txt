@@ -1,0 +1,5 @@
+ALTER TABLE `ajcred`.`resultado_busca` 
+CHARACTER SET = utf8 , COLLATE = utf8_general_ci ,
+ADD COLUMN `margem_cartao_beneficio` VARCHAR(150) NULL DEFAULT NULL AFTER `margem_sindicato_disponivel`,
+ADD COLUMN `margem_cartao_beneficio_reservada` VARCHAR(150) NULL DEFAULT NULL AFTER `margem_cartao_beneficio`,
+ADD COLUMN `margem_cartao_beneficio_disponivel` VARCHAR(150) NULL DEFAULT NULL AFTER `margem_cartao_beneficio_reservada`;

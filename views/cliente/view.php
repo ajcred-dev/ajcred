@@ -126,6 +126,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Margem Disponível'
             ],
             [
+                'attribute' => 'margem_cartao_beneficio',
+                'label' => 'Cartão Benefício'
+            ],
+            [
+                'attribute' => 'margem_cartao_beneficio_reservada',
+                'label' => 'Cartão Benefício Reservado'
+            ],
+            [
+                'attribute' => 'margem_cartao_beneficio_disponivel',
+                'label' => 'Cartão Benefício Disponível'
+            ],
+            [
                 'attribute' => 'margem_cartao',
                 'label' => 'Margem Cartão'
             ],
